@@ -57,7 +57,7 @@ const getUser = async (req, res) => {
     }
 }
 
-const totalPrice = async (req, res) => {
+const getReward = async (req, res) => {
     try {
 
         let Id = req.body.userId
@@ -66,7 +66,7 @@ const totalPrice = async (req, res) => {
         let IndvPrice = indvUser.price
 
         let sum = 0
-        for (let userId = 1; userId <= 10; userId++) {
+        for (let userId = 1; userId <= 100000 && userId !=null; userId++) { // set userId <=10 to get immediate response
 
             let calPrice = await userModel.findOne({ userId: userId })
             sum = sum + calPrice.price
@@ -90,5 +90,5 @@ const totalPrice = async (req, res) => {
 
 
 
-module.exports = { regUser, getUser, totalPrice }
+module.exports = { regUser, getUser, getReward }
 
