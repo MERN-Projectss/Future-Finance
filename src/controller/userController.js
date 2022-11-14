@@ -26,7 +26,7 @@ const regUser = async (req, res) => {
         }
 
         const regiredUserList = await userModel.find()
-        res.status(201).send({ status: true, Message: "All users - ", regiredUserList })
+        res.status(201).send({ status: true, Message: "All users --->>> ", regiredUserList })
 
     } catch (error) {
         res.status(500).send({ error: error.message })
@@ -35,16 +35,14 @@ const regUser = async (req, res) => {
 }
 
 
-
+// fetching registered user list
 const getUser = async (req, res) => {
     try {
 
-        const userFilter = await userModel.find()
+        const userList = await userModel.find()
 
-
-
-        if (userFilter.length) {
-            return res.status(400).send({ status: true, count: userFilter.length, msg: "All user list", data: userFilter })
+        if (userList.length) {
+            return res.status(400).send({ status: true, count: userList.length, msg: "All user list", data: userList })
         } else {
             return res.status(404).send({ status: false, msg: "No user found" })
         }
@@ -66,7 +64,7 @@ const getReward = async (req, res) => {
         let IndvPrice = indvUser.price
 
         let sum = 0
-        for (let userId = 1; userId <= 100000 && userId !=null; userId++) { // set userId <=10 to get immediate response
+        for (let userId = 1; userId <= 100000 && userId !=null; userId++) { // set userId <=10 to get immediate response because userId <=100000 takes to much time to respond
 
             let calPrice = await userModel.findOne({ userId: userId })
             sum = sum + calPrice.price
